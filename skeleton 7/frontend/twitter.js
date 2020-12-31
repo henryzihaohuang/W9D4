@@ -1,13 +1,12 @@
 const FollowToggle = require("./follow_toggle");
 
+// window.FollowToggle = FollowToggle;
 
 $(() => {
-
-    $("button.follow-toggle").each((index, el) => {
-
+    debugger
+    $(".follow-toggle").each( function(index, el) {
         return new FollowToggle(el);
-
-    })
+    });
 
 });
 

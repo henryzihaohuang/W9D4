@@ -1,2 +1,126 @@
-!function(e){var t={};function o(l){if(t[l])return t[l].exports;var n=t[l]={i:l,l:!1,exports:{}};return e[l].call(n.exports,n,n.exports,o),n.l=!0,n.exports}o.m=e,o.c=t,o.d=function(e,t,l){o.o(e,t)||Object.defineProperty(e,t,{enumerable:!0,get:l})},o.r=function(e){"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(e,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(e,"__esModule",{value:!0})},o.t=function(e,t){if(1&t&&(e=o(e)),8&t)return e;if(4&t&&"object"==typeof e&&e&&e.__esModule)return e;var l=Object.create(null);if(o.r(l),Object.defineProperty(l,"default",{enumerable:!0,value:e}),2&t&&"string"!=typeof e)for(var n in e)o.d(l,n,function(t){return e[t]}.bind(null,n));return l},o.n=function(e){var t=e&&e.__esModule?function(){return e.default}:function(){return e};return o.d(t,"a",t),t},o.o=function(e,t){return Object.prototype.hasOwnProperty.call(e,t)},o.p="",o(o.s=0)}([function(e,t,o){const l=o(1);$(()=>{$("button.follow-toggle").each((e,t)=>new l(t))})},function(e,t){e.exports=class{constructor(e){this.$el=$(""+e),this.userId=this.$el.data("user-id"),this.followState=this.$el.data("initial-follow-state"),this.render()}render(){"unfollowed"===this.followState?this.$el.text("Follow!"):this.$el.text("Unfollow!")}handleClick(){this.$el.on("click",e=>(e.preventDefault(),"followed"===this.followState?$.ajax({method:"POST",url:`/users/${this.userId}/follow`,datatype:"json",success:()=>{this.$el.toggleClass(followed)}}):$.ajax({method:"DELETE",url:`/users/${this.userId}/follow`,datatype:"json",success:()=>{this.$el.toggleClass(unfollowed)}})))}}}]);
+/******/ (() => { // webpackBootstrap
+/******/ 	var __webpack_modules__ = ({
+
+/***/ "./frontend/follow_toggle.js":
+/*!***********************************!*\
+  !*** ./frontend/follow_toggle.js ***!
+  \***********************************/
+/***/ ((module) => {
+
+class FollowToggle {
+    constructor(el) {
+        // debugger
+        this.$el = $(el);
+        // debugger
+        this.userId = this.$el.data('user-id');
+        // debugger
+        this.followState = this.$el.data('initial-follow-state');
+        debugger
+        this.render();
+        debugger
+        this.handleClick();
+    }
+
+    render() {
+        debugger
+        if (this.followState === "unfollowed") {
+            this.$el.text("Follow!");
+        } else if(this.followState === "followed") {
+            this.$el.text("Unfollow!")
+        }
+    };
+
+    handleClick(){
+        debugger
+        this.$el.on("click", e => {
+            e.preventDefault();
+            debugger
+
+            if (this.followState === "unfollowed"){
+
+                debugger
+                return $.ajax({
+                    method:"POST",
+                    url: '/users/:user_id/follow',
+                    datatype: 'json',
+                    success: () => {
+                        this.$el.data('initial-follow-state', 'followed');
+                    },
+                    error: console.log('error')
+                })
+
+            } else if(this.followState === "followed") {
+                debugger
+                return $.ajax({
+                    method: "DELETE",
+                    url: '/users/:user_id/follow',
+                    datatype: 'json',
+                    success: () => {
+                        this.$el.data('initial-follow-state', 'unfollowed');
+                    },
+                    error: console.log('error')
+                })
+            }
+
+            this.render();
+        })
+
+    }
+}
+
+
+
+module.exports = FollowToggle;
+
+
+/***/ })
+
+/******/ 	});
+/************************************************************************/
+/******/ 	// The module cache
+/******/ 	var __webpack_module_cache__ = {};
+/******/ 	
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/ 		// Check if module is in cache
+/******/ 		if(__webpack_module_cache__[moduleId]) {
+/******/ 			return __webpack_module_cache__[moduleId].exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = __webpack_module_cache__[moduleId] = {
+/******/ 			// no module.id needed
+/******/ 			// no module.loaded needed
+/******/ 			exports: {}
+/******/ 		};
+/******/ 	
+/******/ 		// Execute the module function
+/******/ 		__webpack_modules__[moduleId](module, module.exports, __webpack_require__);
+/******/ 	
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/ 	
+/************************************************************************/
+(() => {
+/*!*****************************!*\
+  !*** ./frontend/twitter.js ***!
+  \*****************************/
+const FollowToggle = __webpack_require__(/*! ./follow_toggle */ "./frontend/follow_toggle.js");
+
+// window.FollowToggle = FollowToggle;
+
+$(() => {
+    debugger
+    $(".follow-toggle").each( function(index, el) {
+        return new FollowToggle(el);
+    });
+
+});
+
+
+
+})();
+
+/******/ })()
+;
 //# sourceMappingURL=bundle.js.map
